@@ -1,4 +1,22 @@
 #
+# olinuxino-a20som
+#
+
+IMAGE_FSTYPES_append_olinuxino-a20som = " balenaos-img"
+
+# Customize balenaos-img
+BALENA_IMAGE_BOOTLOADER_olinuxino-a20som = "u-boot"
+BALENA_BOOT_PARTITION_FILES_olinuxino-a20som = " \
+    ${KERNEL_IMAGETYPE}${KERNEL_INITRAMFS}-${MACHINE}.bin:/${KERNEL_IMAGETYPE} \
+    sun7i-a20-olimex-som-evb.dtb:/dtb/sun7i-a20-olimex-som-evb.dtb \
+    u-boot-sunxi-with-spl.bin: \
+"
+IMAGE_CMD_balenaos-img_append_olinuxino-a20som () {
+    # olinuxino-a20som needs uboot written at a specific location
+    dd if=${DEPLOY_DIR_IMAGE}/u-boot-sunxi-with-spl.bin of=${BALENA_RAW_IMG} conv=notrunc seek=8 bs=1024
+}
+
+#
 # Orange Pi Plus2
 #
 
