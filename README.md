@@ -4,8 +4,10 @@ This repo builds support for balenaOS on the Allwinner SoCs.
 
 Currently Supported SoC versions:
 * H3
+* A20
 
 Currently Supported Boards:
+* [Olimex A20-SOM](https://www.olimex.com/Products/SOM/A20/A20-SOM/)
 * [NanoPi Neo Air](http://www.friendlyarm.com/index.php?route=product/product&product_id=151)
 * [Orange Pi Lite](http://www.orangepi.org/orangepilite/)
 
