@@ -123,3 +123,28 @@ KERNEL_DEVICETREE_orange-pi-zero_append = " \
     overlay/sun8i-h3-usbhost3.dtbo \
     overlay/sun8i-h3-w1-gpio.dtbo \
     "
+
+KERNEL_DEVICETREE_olinuxino-a20som_append = " \
+    sun7i-a20-olimex-som-evb.dtb \
+    overlay/sun7i-a20-analog-codec.dtbo \
+    overlay/sun7i-a20-can.dtbo \
+    overlay/sun7i-a20-i2c1.dtbo \
+    overlay/sun7i-a20-i2c2.dtbo \
+    overlay/sun7i-a20-i2c3.dtbo \
+    overlay/sun7i-a20-i2c4.dtbo \
+    overlay/sun7i-a20-mmc2.dtbo \
+    overlay/sun7i-a20-nand.dtbo \
+    overlay/sun7i-a20-pps-gpio.dtbo \
+    overlay/sun7i-a20-pwm.dtbo \
+    overlay/sun7i-a20-spdif-out.dtbo \
+    overlay/sun7i-a20-spi-add-cs1.dtbo \
+    overlay/sun7i-a20-spi-jedec-nor.dtbo \
+    overlay/sun7i-a20-spi-spidev.dtbo \
+    overlay/sun7i-a20-uart2.dtbo \
+    overlay/sun7i-a20-uart3.dtbo \
+    overlay/sun7i-a20-uart4.dtbo \
+    overlay/sun7i-a20-uart5.dtbo \
+    overlay/sun7i-a20-uart6.dtbo \
+    overlay/sun7i-a20-uart7.dtbo \
+    overlay/sun7i-a20-w1-gpio.dtbo \
+    "
