@@ -125,7 +125,7 @@ KERNEL_DEVICETREE_orange-pi-zero_append = " \
     "
 
 KERNEL_DEVICETREE_olinuxino-a20som_append = " \
-    sun7i-a20-olimex-som-evb.dtb \
+    sun7i-a20-olinuxino-micro.dtb \
     overlay/sun7i-a20-analog-codec.dtbo \
     overlay/sun7i-a20-can.dtbo \
     overlay/sun7i-a20-i2c1.dtbo \

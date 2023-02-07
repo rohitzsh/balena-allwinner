@@ -3,6 +3,7 @@ build*/
 
 # Ignore shared directories
 shared-*/
+/img
 
 # Some log files from scripts
 *.log

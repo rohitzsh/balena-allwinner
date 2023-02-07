@@ -8,7 +8,7 @@ IMAGE_FSTYPES_append_olinuxino-a20som = " balenaos-img"
 BALENA_IMAGE_BOOTLOADER_olinuxino-a20som = "u-boot"
 BALENA_BOOT_PARTITION_FILES_olinuxino-a20som = " \
     ${KERNEL_IMAGETYPE}${KERNEL_INITRAMFS}-${MACHINE}.bin:/${KERNEL_IMAGETYPE} \
-    sun7i-a20-olimex-som-evb.dtb:/dtb/sun7i-a20-olimex-som-evb.dtb \
+    sun7i-a20-olinuxino-micro.dtb:/dtb/sun7i-a20-olinuxino-micro.dtb \
     sun7i-a20-analog-codec.dtbo:/dtb/overlay/sun7i-a20-analog-codec.dtbo \
     sun7i-a20-can.dtbo:/dtb/overlay/sun7i-a20-can.dtbo \
     sun7i-a20-i2c1.dtbo:/dtb/overlay/sun7i-a20-i2c1.dtbo \
