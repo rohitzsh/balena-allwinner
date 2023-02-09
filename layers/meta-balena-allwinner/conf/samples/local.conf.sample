@@ -60,4 +60,4 @@ CONF_VERSION = "1"
 HOSTTOOLS += "docker iptables"
 
 ## todo: only for vagrant 
-TMPDIR = "/opt/yocto"
+#TMPDIR = "/opt/yocto"
