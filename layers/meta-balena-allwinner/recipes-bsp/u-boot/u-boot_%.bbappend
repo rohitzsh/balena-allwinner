@@ -7,7 +7,7 @@ SRC_URI_remove = " \
 		file://0001-nanopi_neo_air_defconfig-Enable-eMMC-support.patch \
 		"
 
-# SRC_URI_append = " \
-# 		file://0001-Upstream-Status-Inappropriate-Resin-specific.patch \
-# 		file://0002-This-patch-integrates-resin-default-environment-conf.patch \
-# 		"
+SRC_URI_append = " \
+ 		file://0001-Subject-PATCH-Add-Resin-specific-boot-command.patch \
+ 		file://0002-Balena-env-on-uboot.patch \
+ 		"
