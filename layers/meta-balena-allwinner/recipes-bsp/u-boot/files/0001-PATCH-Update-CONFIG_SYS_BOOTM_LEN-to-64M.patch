@@ -1,0 +1,27 @@
+From 17e0c76f2c7228732481477c17b868ef336c46e1 Mon Sep 17 00:00:00 2001
+From: Rohit Sharma <rohit.sharma@r2p.com>
+Date: Fri, 10 Feb 2023 08:39:12 +0100
+Subject: [PATCH] [PATCH] Update CONFIG_SYS_BOOTM_LEN to 64M
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Rohit Sharma <rohitsharmanotify@gmail.com>
+---
+ include/configs/sunxi-common.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/include/configs/sunxi-common.h b/include/configs/sunxi-common.h
+index e89ad42ce8..da5a884d8d 100644
+--- a/include/configs/sunxi-common.h
++++ b/include/configs/sunxi-common.h
+@@ -190,6 +190,7 @@
+ 
+ #else
+ 
++#define CONFIG_SYS_BOOTM_LEN   (64 << 20)
+ #define MEM_LAYOUT_ENV_EXTRA_SETTINGS ""
+ 
+ #endif
+-- 
+2.20.1
+

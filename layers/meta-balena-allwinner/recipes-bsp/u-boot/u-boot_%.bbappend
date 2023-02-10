@@ -8,6 +8,7 @@ SRC_URI_remove = " \
 		"
 
 SRC_URI_append = " \
+		file://0001-PATCH-Update-CONFIG_SYS_BOOTM_LEN-to-64M.patch \
  		file://0001-Subject-PATCH-Add-Resin-specific-boot-command.patch \
  		file://0002-Balena-env-on-uboot.patch \
  		"
