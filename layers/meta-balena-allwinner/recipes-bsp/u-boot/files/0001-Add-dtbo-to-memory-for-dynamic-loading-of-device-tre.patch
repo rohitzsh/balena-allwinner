@@ -1,0 +1,56 @@
+From 21fed6b92dd8024369e49c465870724c8dd5f7fb Mon Sep 17 00:00:00 2001
+From: Rohit Sharma <rohit.sharma@r2p.com>
+Date: Mon, 13 Feb 2023 13:13:37 +0100
+Subject: [PATCH] Add dtbo to memory for dynamic loading of device tree
+ overlays
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Rohit Sharma <rohitsharmanotify@gmail.com>
+---
+ include/configs/sunxi-common.h | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+
+diff --git a/include/configs/sunxi-common.h b/include/configs/sunxi-common.h
+index 1ba608dff0..fbb2d803fc 100644
+--- a/include/configs/sunxi-common.h
++++ b/include/configs/sunxi-common.h
+@@ -397,10 +397,35 @@ extern int soft_i2c_gpio_scl;
+ #undef CONFIG_BOOTCOMMAND
+ #define CONFIG_BOOTCOMMAND \
+ 	"setenv resin_kernel_load_addr ${kernel_addr_r};" \
++	"setenv fdt_ov_addr 0x44000000;" \
+ 	"run resin_set_kernel_root;" \
+ 	"setenv bootargs ${resin_kernel_root} rootfstype=ext4 rootwait console=$console;" \
+ 	"fatload ${resin_dev_type} ${resin_dev_index}:${resin_boot_part} ${resin_kernel_load_addr} uimage;" \
+ 	"fatload ${resin_dev_type} ${resin_dev_index}:${resin_boot_part} ${fdt_addr_r} dtb/${fdtfile};" \
++	"fatload ${resin_dev_type} ${resin_dev_index}:${resin_boot_part} ${fdt_ov_addr} dtb/overlay/sun7i-a20-analog-codec.dtbo;" \
++	"fatload ${resin_dev_type} ${resin_dev_index}:${resin_boot_part} ${fdt_ov_addr} dtb/overlay/sun7i-a20-can.dtbo;" \
++	"fatload ${resin_dev_type} ${resin_dev_index}:${resin_boot_part} ${fdt_ov_addr} dtb/overlay/sun7i-a20-i2c1.dtbo;" \
++	"fatload ${resin_dev_type} ${resin_dev_index}:${resin_boot_part} ${fdt_ov_addr} dtb/overlay/sun7i-a20-i2c2.dtbo;" \
++	"fatload ${resin_dev_type} ${resin_dev_index}:${resin_boot_part} ${fdt_ov_addr} dtb/overlay/sun7i-a20-i2c3.dtbo;" \
++	"fatload ${resin_dev_type} ${resin_dev_index}:${resin_boot_part} ${fdt_ov_addr} dtb/overlay/sun7i-a20-i2c4.dtbo;" \
++	"fatload ${resin_dev_type} ${resin_dev_index}:${resin_boot_part} ${fdt_ov_addr} dtb/overlay/sun7i-a20-mmc2.dtbo;" \
++	"fatload ${resin_dev_type} ${resin_dev_index}:${resin_boot_part} ${fdt_ov_addr} dtb/overlay/sun7i-a20-nand.dtbo;" \
++	"fatload ${resin_dev_type} ${resin_dev_index}:${resin_boot_part} ${fdt_ov_addr} dtb/overlay/sun7i-a20-pps-gpio.dtbo;" \
++	"fatload ${resin_dev_type} ${resin_dev_index}:${resin_boot_part} ${fdt_ov_addr} dtb/overlay/sun7i-a20-pwm.dtbo;" \
++	"fatload ${resin_dev_type} ${resin_dev_index}:${resin_boot_part} ${fdt_ov_addr} dtb/overlay/sun7i-a20-spdif-out.dtbo;" \
++	"fatload ${resin_dev_type} ${resin_dev_index}:${resin_boot_part} ${fdt_ov_addr} dtb/overlay/sun7i-a20-spi-add-cs1.dtbo;" \
++	"fatload ${resin_dev_type} ${resin_dev_index}:${resin_boot_part} ${fdt_ov_addr} dtb/overlay/sun7i-a20-spi-jedec-nor.dtbo;" \
++	"fatload ${resin_dev_type} ${resin_dev_index}:${resin_boot_part} ${fdt_ov_addr} dtb/overlay/sun7i-a20-spi-spidev.dtbo;" \
++	"fatload ${resin_dev_type} ${resin_dev_index}:${resin_boot_part} ${fdt_ov_addr} dtb/overlay/sun7i-a20-uart2.dtbo;" \
++	"fatload ${resin_dev_type} ${resin_dev_index}:${resin_boot_part} ${fdt_ov_addr} dtb/overlay/sun7i-a20-uart3.dtbo;" \
++	"fatload ${resin_dev_type} ${resin_dev_index}:${resin_boot_part} ${fdt_ov_addr} dtb/overlay/sun7i-a20-uart4.dtbo;" \
++	"fatload ${resin_dev_type} ${resin_dev_index}:${resin_boot_part} ${fdt_ov_addr} dtb/overlay/sun7i-a20-uart5.dtbo;" \
++	"fatload ${resin_dev_type} ${resin_dev_index}:${resin_boot_part} ${fdt_ov_addr} dtb/overlay/sun7i-a20-uart6.dtbo;" \
++	"fatload ${resin_dev_type} ${resin_dev_index}:${resin_boot_part} ${fdt_ov_addr} dtb/overlay/sun7i-a20-uart7.dtbo;" \
++	"fatload ${resin_dev_type} ${resin_dev_index}:${resin_boot_part} ${fdt_ov_addr} dtb/overlay/sun7i-a20-w1-gpio.dtbo;" \
++	"fdt addr ${fdt_addr_r};" \
++	"fdt resize 8192;" \
++	"fdt apply ${fdt_ov_addr};" \
+ 	"bootm ${resin_kernel_load_addr} - ${fdt_addr_r}"
+  
+ #ifdef CONFIG_USB_KEYBOARD
+-- 
+2.39.2
+
