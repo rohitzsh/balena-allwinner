@@ -1,0 +1,27 @@
+From 1d0429c5f61f12f981b355ecb674b173d96abf4d Mon Sep 17 00:00:00 2001
+From: Rohit Sharma <rohit.sharma@r2p.com>
+Date: Thu, 16 Feb 2023 07:47:54 +0100
+Subject: [PATCH 2/3] Update CONFIG_SYS_BOOTM_LEN to 64M
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Rohit Sharma <rohitsharmanotify@gmail.com>
+---
+ include/configs/sunxi-common.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/include/configs/sunxi-common.h b/include/configs/sunxi-common.h
+index f94e70c910..23f3f18fc4 100644
+--- a/include/configs/sunxi-common.h
++++ b/include/configs/sunxi-common.h
+@@ -181,6 +181,7 @@
+ 
+ #else
+ 
++#define CONFIG_SYS_BOOTM_LEN   (64 << 20)      /* Increase max gunzip size 64M */
+ #define MEM_LAYOUT_ENV_EXTRA_SETTINGS ""
+ 
+ #endif
+-- 
+2.39.2
+
