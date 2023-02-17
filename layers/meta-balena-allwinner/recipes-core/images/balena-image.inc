@@ -9,27 +9,6 @@ BALENA_IMAGE_BOOTLOADER_olinuxino-a20som = "u-boot"
 BALENA_BOOT_PARTITION_FILES_olinuxino-a20som = " \
     ${KERNEL_IMAGETYPE}${KERNEL_INITRAMFS}-${MACHINE}.bin:/${KERNEL_IMAGETYPE} \
     sun7i-a20-olinuxino-micro.dtb:/dtb/sun7i-a20-olinuxino-micro.dtb \
-    sun7i-a20-analog-codec.dtbo:/dtb/overlay/sun7i-a20-analog-codec.dtbo \
-    sun7i-a20-can.dtbo:/dtb/overlay/sun7i-a20-can.dtbo \
-    sun7i-a20-i2c1.dtbo:/dtb/overlay/sun7i-a20-i2c1.dtbo \
-    sun7i-a20-i2c2.dtbo:/dtb/overlay/sun7i-a20-i2c2.dtbo \
-    sun7i-a20-i2c3.dtbo:/dtb/overlay/sun7i-a20-i2c3.dtbo \
-    sun7i-a20-i2c4.dtbo:/dtb/overlay/sun7i-a20-i2c4.dtbo \
-    sun7i-a20-mmc2.dtbo:/dtb/overlay/sun7i-a20-mmc2.dtbo \
-    sun7i-a20-nand.dtbo:/dtb/overlay/sun7i-a20-nand.dtbo \
-    sun7i-a20-pps-gpio.dtbo:/dtb/overlay/sun7i-a20-pps-gpio.dtbo \
-    sun7i-a20-pwm.dtbo:/dtb/overlay/sun7i-a20-pwm.dtbo \
-    sun7i-a20-spdif-out.dtbo:/dtb/overlay/sun7i-a20-spdif-out.dtbo \
-    sun7i-a20-spi-add-cs1.dtbo:/dtb/overlay/sun7i-a20-spi-add-cs1.dtbo \
-    sun7i-a20-spi-jedec-nor.dtbo:/dtb/overlay/sun7i-a20-spi-jedec-nor.dtbo \
-    sun7i-a20-spi-spidev.dtbo:/dtb/overlay/sun7i-a20-spi-spidev.dtbo \
-    sun7i-a20-uart2.dtbo:/dtb/overlay/sun7i-a20-uart2.dtbo \
-    sun7i-a20-uart3.dtbo:/dtb/overlay/sun7i-a20-uart3.dtbo \
-    sun7i-a20-uart4.dtbo:/dtb/overlay/sun7i-a20-uart4.dtbo \
-    sun7i-a20-uart5.dtbo:/dtb/overlay/sun7i-a20-uart5.dtbo \
-    sun7i-a20-uart6.dtbo:/dtb/overlay/sun7i-a20-uart6.dtbo \
-    sun7i-a20-uart7.dtbo:/dtb/overlay/sun7i-a20-uart7.dtbo \
-    sun7i-a20-w1-gpio.dtbo:/dtb/overlay/sun7i-a20-w1-gpio.dtbo \
     u-boot-sunxi-with-spl.bin: \
 "
 IMAGE_CMD_balenaos-img_append_olinuxino-a20som () {
