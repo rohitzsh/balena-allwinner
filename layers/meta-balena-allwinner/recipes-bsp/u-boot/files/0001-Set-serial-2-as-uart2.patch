@@ -1,0 +1,41 @@
+From 1e5113373960463b440df4f3df3da580f8d6301a Mon Sep 17 00:00:00 2001
+From: Rohit Sharma <rohit.sharma@r2p.com>
+Date: Fri, 17 Feb 2023 07:49:45 +0100
+Subject: [PATCH] Set serial 2 as uart2
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Rohit Sharma <rohitsharmanotify@gmail.com>
+---
+ arch/arm/dts/sun7i-a20-olinuxino-micro.dts | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/arch/arm/dts/sun7i-a20-olinuxino-micro.dts b/arch/arm/dts/sun7i-a20-olinuxino-micro.dts
+index a1b89b2a29..7182324c16 100644
+--- a/arch/arm/dts/sun7i-a20-olinuxino-micro.dts
++++ b/arch/arm/dts/sun7i-a20-olinuxino-micro.dts
+@@ -57,7 +57,7 @@
+ 	aliases {
+ 		serial0 = &uart0;
+ 		serial1 = &uart6;
+-		serial2 = &uart7;
++		serial2 = &uart2;
+ 		spi0 = &spi1;
+ 		spi1 = &spi2;
+ 	};
+@@ -329,9 +329,10 @@
+ 	status = "okay";
+ };
+ 
+-&uart7 {
++&uart2 {
+ 	pinctrl-names = "default";
+-	pinctrl-0 = <&uart7_pi_pins>;
++	pinctrl-0 = <&uart2_pi_pins>, <&uart2_cts_rts_pi_pins>;
++	uart-has-rtscts;
+ 	status = "okay";
+ };
+ 
+-- 
+2.39.2
+

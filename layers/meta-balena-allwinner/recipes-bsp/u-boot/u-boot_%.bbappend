@@ -11,4 +11,5 @@ SRC_URI_append = " \
 		file://0001-Add-dtbo-to-memory-for-dynamic-loading-of-device-tre.patch \
  		file://0002-Update-CONFIG_SYS_BOOTM_LEN-to-64M.patch \
  		file://0003-Balena-env-on-uboot.patch \
+ 		file://0001-Set-serial-2-as-uart2.patch \
  		"
