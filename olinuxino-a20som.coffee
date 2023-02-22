@@ -3,9 +3,9 @@ deviceTypesCommon = require '@resin.io/device-types/common'
 
 module.exports =
 	version: 1
-	slug: 'olinuxino-a20som'
-	name: 'olinuxino-a20som'
-	aliases: [ 'olinuxino-a20som' ]
+	slug: 'orange-pi-one'
+	name: 'orange-pi-one'
+	aliases: [ 'orange-pi-one' ]
 	arch: 'armv7hf'
 	state: 'new'
 	community: true
