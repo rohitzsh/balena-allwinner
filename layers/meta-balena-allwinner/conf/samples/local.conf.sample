@@ -62,4 +62,4 @@ HOSTTOOLS += "docker iptables"
 ## todo: only for vagrant 
 #TMPDIR = "/opt/yocto"
 
-IMAGE_INSTALL_append = " inotify-tools i2c-tools"
+IMAGE_INSTALL_append = " inotify-tools i2c-tools tcpdump"
