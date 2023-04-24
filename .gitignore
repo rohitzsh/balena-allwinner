@@ -15,3 +15,5 @@ shared-*/
 
 # dynamically created by the build script
 conf-notes.txt
+
+/tmp
