@@ -1,0 +1,54 @@
+From c9f799d0167d540677e0a33730ce266abff2df1b Mon Sep 17 00:00:00 2001
+From: Rohit Sharma <rohit.sharma@r2p.com>
+Date: Tue, 16 May 2023 08:51:26 +0200
+Subject: [PATCH] Add support for enabling RS232 FET via GPIO
+
+---
+ .../boot/dts/sun7i-a20-olinuxino-micro.dts    | 24 +++++++++++++------
+ 1 file changed, 17 insertions(+), 7 deletions(-)
+
+diff --git a/arch/arm/boot/dts/sun7i-a20-olinuxino-micro.dts b/arch/arm/boot/dts/sun7i-a20-olinuxino-micro.dts
+index c178f0ca3..f6756767c 100644
+--- a/arch/arm/boot/dts/sun7i-a20-olinuxino-micro.dts
++++ b/arch/arm/boot/dts/sun7i-a20-olinuxino-micro.dts
+@@ -90,6 +90,23 @@
+ 			default-state = "on";
+ 		};
+ 	};
++
++	gpio {
++		compatible = "gpio-leds";
++		pinctrl-names = "default";
++		pinctrl-0 = <&gpio_pins>;
++
++		gpio_pins: pinmux {
++			gpio-pin@0 {
++				gpio-hog;
++				gpios = <&pio 7 11 GPIO_ACTIVE_HIGH>; /* PH11 */
++				output-high;
++				label = "rs232-fet";
++				linux,phandle = <&gpio_pins>;
++				phandle = <&gpio_pins>;
++			};
++		};
++	};
+ };
+ 
+ &ahci {
+@@ -226,13 +243,6 @@
+ 	status = "okay";
+ };
+ 
+-&mmc3 {
+-	vmmc-supply = <&reg_vcc3v3>;
+-	bus-width = <4>;
+-	cd-gpios = <&pio 7 11 GPIO_ACTIVE_LOW>; /* PH11 */
+-	status = "okay";
+-};
+-
+ &ohci0 {
+ 	status = "okay";
+ };
+-- 
+2.20.1
+
