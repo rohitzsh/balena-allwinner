@@ -1,8 +1,17 @@
+From 127a93b99580c6ebc27dcb332c2f12d712032c9a Mon Sep 17 00:00:00 2001
+From: rohit <rohit.sharma@r2p.com>
+Date: Wed, 8 Nov 2023 11:14:41 +0000
+Subject: [PATCH] fix device tree for olimex a20 som carrier board
+
+---
+ .../boot/dts/sun7i-a20-olinuxino-micro.dts    | 25 ++++++++++++++++++-
+ 1 file changed, 24 insertions(+), 1 deletion(-)
+
 diff --git a/arch/arm/boot/dts/sun7i-a20-olinuxino-micro.dts b/arch/arm/boot/dts/sun7i-a20-olinuxino-micro.dts
-index 8ab0abf1b..2fbb1a878 100644
+index 359bd0d5b3b1..87f8c94e99d2 100644
 --- a/arch/arm/boot/dts/sun7i-a20-olinuxino-micro.dts
 +++ b/arch/arm/boot/dts/sun7i-a20-olinuxino-micro.dts
-@@ -58,7 +58,9 @@
+@@ -57,7 +57,10 @@
  	aliases {
  		serial0 = &uart0;
  		serial1 = &uart6;
@@ -10,17 +19,16 @@ index 8ab0abf1b..2fbb1a878 100644
 +		serial2 = &uart2;
 +		serial3 = &uart4;
 +		serial4 = &uart3;
++		serial5 = &uart7;
  		spi0 = &spi1;
  		spi1 = &spi2;
  	};
-@@ -330,9 +332,23 @@
+@@ -329,6 +332,26 @@
  	status = "okay";
  };
  
--&uart7 {
 +&uart2 {
- 	pinctrl-names = "default";
--	pinctrl-0 = <&uart7_pi_pins>;
++	pinctrl-names = "default";
 +	pinctrl-0 = <&uart2_pi_pins>, <&uart2_cts_rts_pi_pins>;
 +	uart-has-rtscts;
 +	status = "okay";
@@ -36,6 +44,12 @@ index 8ab0abf1b..2fbb1a878 100644
 +&uart4 {
 +	pinctrl-names = "default";
 +	pinctrl-0 = <&uart4_pg_pins>;
- 	status = "okay";
- };
- 
++	status = "okay";
++};
++
+ &uart7 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&uart7_pi_pins>;
+-- 
+2.42.1
+
