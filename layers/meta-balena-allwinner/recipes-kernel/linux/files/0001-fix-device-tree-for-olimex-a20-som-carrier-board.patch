@@ -1,4 +1,4 @@
-From 127a93b99580c6ebc27dcb332c2f12d712032c9a Mon Sep 17 00:00:00 2001
+From ba20d4ecf49c52f4ae33b015d43e4e4af01530d3 Mon Sep 17 00:00:00 2001
 From: rohit <rohit.sharma@r2p.com>
 Date: Wed, 8 Nov 2023 11:14:41 +0000
 Subject: [PATCH] fix device tree for olimex a20 som carrier board
