@@ -20,6 +20,14 @@ SRC_URI_append = " \
     file://0001-fix-device-tree-for-olimex-a20-som-carrier-board.patch \
 "
 
+BALENA_CONFIGS_append = " snd"
+BALENA_CONFIGS[snd] ="\
+    CONFIG_SOUND=y \
+    CONFIG_SND=y \
+    CONFIG_SND_SOC=y \
+    CONFIG_SND_SUN4I_CODEC=y \
+"
+
 BALENA_CONFIGS_append = " axp_power"
 BALENA_CONFIGS_DEPS[axp_power] = "\
     CONFIG_TOUCHSCREEN_SUN4I=n \
