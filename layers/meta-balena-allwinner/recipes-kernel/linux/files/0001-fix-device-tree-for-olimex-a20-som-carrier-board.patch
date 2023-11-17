@@ -1,14 +1,14 @@
-From ba20d4ecf49c52f4ae33b015d43e4e4af01530d3 Mon Sep 17 00:00:00 2001
+From e196fd117895c2a557e2b623a69120e82c0d71b7 Mon Sep 17 00:00:00 2001
 From: rohit <rohit.sharma@r2p.com>
 Date: Wed, 8 Nov 2023 11:14:41 +0000
 Subject: [PATCH] fix device tree for olimex a20 som carrier board
 
 ---
- .../boot/dts/sun7i-a20-olinuxino-micro.dts    | 25 ++++++++++++++++++-
- 1 file changed, 24 insertions(+), 1 deletion(-)
+ .../boot/dts/sun7i-a20-olinuxino-micro.dts    | 31 ++++++++++++++++++-
+ 1 file changed, 30 insertions(+), 1 deletion(-)
 
 diff --git a/arch/arm/boot/dts/sun7i-a20-olinuxino-micro.dts b/arch/arm/boot/dts/sun7i-a20-olinuxino-micro.dts
-index 359bd0d5b3b1..87f8c94e99d2 100644
+index 359bd0d5b3b1..0769212db18f 100644
 --- a/arch/arm/boot/dts/sun7i-a20-olinuxino-micro.dts
 +++ b/arch/arm/boot/dts/sun7i-a20-olinuxino-micro.dts
 @@ -57,7 +57,10 @@
@@ -23,7 +23,7 @@ index 359bd0d5b3b1..87f8c94e99d2 100644
  		spi0 = &spi1;
  		spi1 = &spi2;
  	};
-@@ -329,6 +332,26 @@
+@@ -329,12 +332,38 @@
  	status = "okay";
  };
  
@@ -50,6 +50,18 @@ index 359bd0d5b3b1..87f8c94e99d2 100644
  &uart7 {
  	pinctrl-names = "default";
  	pinctrl-0 = <&uart7_pi_pins>;
+ 	status = "okay";
+ };
+ 
++&csi0 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&csi0_8bits_pins>;
++	status = "okay";
++};
++
+ &usb_otg {
+ 	dr_mode = "otg";
+ 	status = "okay";
 -- 
 2.42.1
 
