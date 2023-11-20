@@ -1,14 +1,14 @@
-From e196fd117895c2a557e2b623a69120e82c0d71b7 Mon Sep 17 00:00:00 2001
+From f41240030f9b82818f4907341d473b223518c7ac Mon Sep 17 00:00:00 2001
 From: rohit <rohit.sharma@r2p.com>
 Date: Wed, 8 Nov 2023 11:14:41 +0000
 Subject: [PATCH] fix device tree for olimex a20 som carrier board
 
 ---
- .../boot/dts/sun7i-a20-olinuxino-micro.dts    | 31 ++++++++++++++++++-
- 1 file changed, 30 insertions(+), 1 deletion(-)
+ .../boot/dts/sun7i-a20-olinuxino-micro.dts    | 57 ++++++++++++++++++-
+ 1 file changed, 56 insertions(+), 1 deletion(-)
 
 diff --git a/arch/arm/boot/dts/sun7i-a20-olinuxino-micro.dts b/arch/arm/boot/dts/sun7i-a20-olinuxino-micro.dts
-index 359bd0d5b3b1..0769212db18f 100644
+index 359bd0d5b3b1..2b87006d0a6c 100644
 --- a/arch/arm/boot/dts/sun7i-a20-olinuxino-micro.dts
 +++ b/arch/arm/boot/dts/sun7i-a20-olinuxino-micro.dts
 @@ -57,7 +57,10 @@
@@ -23,7 +23,47 @@ index 359bd0d5b3b1..0769212db18f 100644
  		spi0 = &spi1;
  		spi1 = &spi2;
  	};
-@@ -329,12 +332,38 @@
+@@ -88,6 +91,26 @@
+ 			default-state = "on";
+ 		};
+ 	};
++
++	gpio {
++		compatible = "gpio-leds";
++		pinctrl-names = "default";
++		pinctrl-0 = <&gpio_out_pin>;
++
++		ph11 {
++			label = "rs232-fet";
++			gpios = <&pio 7 11 GPIO_ACTIVE_HIGH>;
++			default-state = "on";
++			output_high;
++		};
++
++		pe5 {
++			label = "audio-sd";
++			gpios = <&pio 4 5 GPIO_ACTIVE_LOW>;
++			default-state = "on";
++			output_low;
++		};
++	};
+ };
+ 
+ &ahci {
+@@ -254,6 +277,12 @@
+ 		function = "gpio_out";
+ 		drive-strength = <20>;
+ 	};
++
++	gpio_out_pin: gpio-out-pin {
++		pins = "PH11", "PE5";
++		function = "gpio_out";
++		drive-strength = <20>;
++	};
+ };
+ 
+ #include "axp209.dtsi"
+@@ -329,12 +358,38 @@
  	status = "okay";
  };
  
