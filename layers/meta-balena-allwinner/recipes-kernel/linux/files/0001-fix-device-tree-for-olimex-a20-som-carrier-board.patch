@@ -1,14 +1,14 @@
-From f41240030f9b82818f4907341d473b223518c7ac Mon Sep 17 00:00:00 2001
+From 3703a0478b09471a2ea2f68786f88beb316eebd7 Mon Sep 17 00:00:00 2001
 From: rohit <rohit.sharma@r2p.com>
 Date: Wed, 8 Nov 2023 11:14:41 +0000
 Subject: [PATCH] fix device tree for olimex a20 som carrier board
 
 ---
- .../boot/dts/sun7i-a20-olinuxino-micro.dts    | 57 ++++++++++++++++++-
- 1 file changed, 56 insertions(+), 1 deletion(-)
+ .../boot/dts/sun7i-a20-olinuxino-micro.dts    | 71 +++++++++++++------
+ 1 file changed, 49 insertions(+), 22 deletions(-)
 
 diff --git a/arch/arm/boot/dts/sun7i-a20-olinuxino-micro.dts b/arch/arm/boot/dts/sun7i-a20-olinuxino-micro.dts
-index 359bd0d5b3b1..2b87006d0a6c 100644
+index 359bd0d5b3b1..e5e6508e007a 100644
 --- a/arch/arm/boot/dts/sun7i-a20-olinuxino-micro.dts
 +++ b/arch/arm/boot/dts/sun7i-a20-olinuxino-micro.dts
 @@ -57,7 +57,10 @@
@@ -23,7 +23,25 @@ index 359bd0d5b3b1..2b87006d0a6c 100644
  		spi0 = &spi1;
  		spi1 = &spi2;
  	};
-@@ -88,6 +91,26 @@
+@@ -66,17 +69,6 @@
+ 		stdout-path = "serial0:115200n8";
+ 	};
+ 
+-	hdmi-connector {
+-		compatible = "hdmi-connector";
+-		type = "a";
+-
+-		port {
+-			hdmi_con_in: endpoint {
+-				remote-endpoint = <&hdmi_out_con>;
+-			};
+-		};
+-	};
+-
+ 	leds {
+ 		compatible = "gpio-leds";
+ 		pinctrl-names = "default";
+@@ -88,6 +80,19 @@
  			default-state = "on";
  		};
  	};
@@ -32,13 +50,6 @@ index 359bd0d5b3b1..2b87006d0a6c 100644
 +		compatible = "gpio-leds";
 +		pinctrl-names = "default";
 +		pinctrl-0 = <&gpio_out_pin>;
-+
-+		ph11 {
-+			label = "rs232-fet";
-+			gpios = <&pio 7 11 GPIO_ACTIVE_HIGH>;
-+			default-state = "on";
-+			output_high;
-+		};
 +
 +		pe5 {
 +			label = "audio-sd";
@@ -50,20 +61,37 @@ index 359bd0d5b3b1..2b87006d0a6c 100644
  };
  
  &ahci {
-@@ -254,6 +277,12 @@
+@@ -123,16 +128,6 @@
+ 	status = "okay";
+ };
+ 
+-&hdmi {
+-	status = "okay";
+-};
+-
+-&hdmi_out {
+-	hdmi_out_con: endpoint {
+-		remote-endpoint = <&hdmi_con_in>;
+-	};
+-};
+-
+ &i2c0 {
+ 	status = "okay";
+ 
+@@ -254,6 +249,12 @@
  		function = "gpio_out";
  		drive-strength = <20>;
  	};
 +
 +	gpio_out_pin: gpio-out-pin {
-+		pins = "PH11", "PE5";
++		pins = "PE5";
 +		function = "gpio_out";
 +		drive-strength = <20>;
 +	};
  };
  
  #include "axp209.dtsi"
-@@ -329,12 +358,38 @@
+@@ -329,12 +330,38 @@
  	status = "okay";
  };
  
