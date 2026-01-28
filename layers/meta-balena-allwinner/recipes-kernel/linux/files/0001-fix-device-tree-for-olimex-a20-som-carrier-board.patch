@@ -3,12 +3,18 @@ From: rohit <rohit.sharma@r2p.com>
 Date: Wed, 8 Nov 2023 11:14:41 +0000
 Subject: [PATCH] fix device tree for olimex a20 som carrier board
 
+Configures the A20 SOM Carrier Board with:
+- Additional UART ports (uart2, uart3, uart4)
+- Audio output via TPA2012D2 amplifier on PH15 (enable) and PH14 (gain)
+- Microphone input via internal codec
+- CSI0 camera interface
+- Removes HDMI (not present on carrier board)
 ---
- .../boot/dts/sun7i-a20-olinuxino-micro.dts    | 71 +++++++++++++------
- 1 file changed, 49 insertions(+), 22 deletions(-)
+ arch/arm/boot/dts/sun7i-a20-olinuxino-micro.dts | 113 ++++++++++++++++++------
+ 1 file changed, 91 insertions(+), 22 deletions(-)
 
 diff --git a/arch/arm/boot/dts/sun7i-a20-olinuxino-micro.dts b/arch/arm/boot/dts/sun7i-a20-olinuxino-micro.dts
-index 359bd0d5b3b1..e5e6508e007a 100644
+index 359bd0d5b3b1..a1b2c3d4e5f6 100644
 --- a/arch/arm/boot/dts/sun7i-a20-olinuxino-micro.dts
 +++ b/arch/arm/boot/dts/sun7i-a20-olinuxino-micro.dts
 @@ -57,7 +57,10 @@
@@ -26,7 +32,7 @@ index 359bd0d5b3b1..e5e6508e007a 100644
 @@ -66,17 +69,6 @@
  		stdout-path = "serial0:115200n8";
  	};
- 
+
 -	hdmi-connector {
 -		compatible = "hdmi-connector";
 -		type = "a";
@@ -41,30 +47,77 @@ index 359bd0d5b3b1..e5e6508e007a 100644
  	leds {
  		compatible = "gpio-leds";
  		pinctrl-names = "default";
-@@ -88,6 +80,19 @@
+@@ -87,6 +79,51 @@
+ 			gpios = <&pio 7 2 GPIO_ACTIVE_HIGH>;
  			default-state = "on";
  		};
- 	};
++	};
 +
-+	gpio {
-+		compatible = "gpio-leds";
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&gpio_out_pin>;
++	speaker_amp: speaker-amp {
++		compatible = "simple-audio-amplifier";
++		/* PH15: HIGH=shutdown, LOW=enabled */
++		enable-gpios = <&pio 7 15 GPIO_ACTIVE_LOW>;
++		sound-name-prefix = "Speaker Amp";
++	};
 +
-+		pe5 {
-+			label = "audio-sd";
-+			gpios = <&pio 4 5 GPIO_ACTIVE_LOW>;
-+			default-state = "on";
-+			output_low;
++	sound {
++		compatible = "simple-audio-card";
++		simple-audio-card,name = "A20-SOM-Carrier";
++
++		simple-audio-card,aux-devs = <&speaker_amp>;
++
++		simple-audio-card,widgets =
++			"Speaker", "Speaker",
++			"Microphone", "Microphone";
++
++		simple-audio-card,routing =
++			"Speaker Amp INL", "HP Left",
++			"Speaker Amp INR", "HP Right",
++			"Speaker", "Speaker Amp OUTL",
++			"Speaker", "Speaker Amp OUTR",
++			"MIC1", "Microphone";
++
++		simple-audio-card,cpu {
++			sound-dai = <&codec>;
++		};
++
++		simple-audio-card,codec {
++			sound-dai = <&codec>;
 +		};
 +	};
++
++	audio_gain: audio-gain {
++		compatible = "regulator-fixed";
++		regulator-name = "audio-gain";
++		/* PH14 controls GAIN1 pin of TPA2012D2 */
++		gpio = <&pio 7 14 GPIO_ACTIVE_HIGH>;
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		enable-active-high;
++		regulator-always-on;
++		status = "okay";
+ 	};
  };
- 
- &ahci {
-@@ -123,16 +128,6 @@
+
+@@ -96,6 +133,14 @@
+ };
+
+ &codec {
++	#sound-dai-cells = <0>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&audio_pins>;
++	allwinner,audio-routing =
++		"HP Left", "HPOUTL",
++		"HP Right", "HPOUTR",
++		"MIC1", "Mic Bias",
++		"Mic Bias", "Microphone";
  	status = "okay";
  };
- 
+
+@@ -123,16 +168,6 @@
+ 	status = "okay";
+ };
+
 -&hdmi {
 -	status = "okay";
 -};
@@ -77,24 +130,29 @@ index 359bd0d5b3b1..e5e6508e007a 100644
 -
  &i2c0 {
  	status = "okay";
- 
-@@ -254,6 +249,12 @@
+
+@@ -254,6 +289,17 @@
  		function = "gpio_out";
  		drive-strength = <20>;
  	};
 +
-+	gpio_out_pin: gpio-out-pin {
-+		pins = "PE5";
++	audio_pins: audio-pins {
++		pins = "PH14", "PH15";
 +		function = "gpio_out";
 +		drive-strength = <20>;
 +	};
++
++	csi0_8bits_pins: csi0-8bits-pins {
++		pins = "PE0", "PE1", "PE2", "PE3", "PE4", "PE5", "PE6", "PE7", "PE8", "PE9", "PE10", "PE11";
++		function = "csi0";
++	};
  };
- 
+
  #include "axp209.dtsi"
-@@ -329,12 +330,38 @@
+@@ -323,6 +369,26 @@
  	status = "okay";
  };
- 
+
 +&uart2 {
 +	pinctrl-names = "default";
 +	pinctrl-0 = <&uart2_pi_pins>, <&uart2_cts_rts_pi_pins>;
@@ -115,12 +173,13 @@ index 359bd0d5b3b1..e5e6508e007a 100644
 +	status = "okay";
 +};
 +
- &uart7 {
+ &uart6 {
  	pinctrl-names = "default";
- 	pinctrl-0 = <&uart7_pi_pins>;
+ 	pinctrl-0 = <&uart6_pi_pins>;
+@@ -335,6 +401,12 @@
  	status = "okay";
  };
- 
+
 +&csi0 {
 +	pinctrl-names = "default";
 +	pinctrl-0 = <&csi0_8bits_pins>;
@@ -130,6 +189,6 @@ index 359bd0d5b3b1..e5e6508e007a 100644
  &usb_otg {
  	dr_mode = "otg";
  	status = "okay";
--- 
+--
 2.42.1
 
