@@ -15,7 +15,7 @@ Audio amplifier notes (TPA3112D1PWP):
   PE5 HIGH = MOSFET on, SD pulled low = shutdown
   PE5 LOW = R30 pulls SD to VIN = enabled
 - PE7 controls GAIN0, PE8 controls GAIN1
-  Both set HIGH for 36dB gain (maximum)
+  Both set LOW for 20dB gain
 
 Uses sun4i-codec's built-in PA GPIO support (allwinner,pa-gpios)
 for proper DAPM integration - amp enables when Speaker widget is active.
@@ -64,8 +64,8 @@ index 359bd0d5b3b1..a1b2c3d4e5f6 100644
 +
 +	/*
 +	 * Audio amplifier gain control (TPA3112D1PWP)
-+	 * Using gpio-leds to hold GAIN pins HIGH for 36dB gain
-+	 * GAIN1=1, GAIN0=1 -> 36dB (maximum)
++	 * Using gpio-leds to hold GAIN pins LOW for 20dB gain
++	 * GAIN1=0, GAIN0=0 -> 20dB
 +	 */
 +	audio-gain-pins {
 +		compatible = "gpio-leds";
@@ -75,13 +75,13 @@ index 359bd0d5b3b1..a1b2c3d4e5f6 100644
 +		gain0 {
 +			label = "audio-gain0";
 +			gpios = <&pio 4 7 GPIO_ACTIVE_HIGH>;
-+			default-state = "on";
++			default-state = "off";
 +		};
 +
 +		gain1 {
 +			label = "audio-gain1";
 +			gpios = <&pio 4 8 GPIO_ACTIVE_HIGH>;
-+			default-state = "on";
++			default-state = "off";
 +		};
 +	};
  };
